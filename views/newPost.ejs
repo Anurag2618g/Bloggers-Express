@@ -1,0 +1,20 @@
+<%- include("partials/header.ejs") %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post</title>
+</head>
+<body>
+    <h1>Create Post</h1>
+    <form action="/submit" method="POST">
+    <input name="title" type="text" class="feedback-input" placeholder="Title" />
+    <textarea name="content" class="feedback-input" placeholder="Content"></textarea>
+    <input type="submit" value="POST" />
+    </form>
+</body>
+</html>
+
+<%- include("partials/footer.ejs") %>
