@@ -1,0 +1,23 @@
+<%- include("partials/header.ejs") %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EditPost</title>
+</head>
+<body>
+
+    <h1>Edit Post</h1>
+    <form action="/update" method="POST">
+        <input type="hidden" name="index" value="<%= index %>">
+        <input name="title" type="text" class="feedback-input" placeholder="Title" value="<%= titles[index] %>"/>
+        <textarea name="content" class="feedback-input" placeholder="Content"><%= contents[index] %></textarea>
+        <input class="btn-primary btn-lg" type="submit" value="UPDATE" />
+    </form>
+  
+</body>
+</html>
+
+<%- include("partials/footer.ejs") %>

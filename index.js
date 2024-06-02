@@ -12,9 +12,15 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 function deleteArr(index) {
-  arrText.splice(index);
-  arrTitle.splice(index);
-  timeStamp.splice(index);
+  arrText.splice(index, 1);
+  arrTitle.splice(index, 1);
+  timeStamp.splice(index, 1);
+}
+
+function updateArr(index, newTitle, newContent) {
+  arrTitle[index] = newTitle;
+  arrText[index] = newContent;
+  timeStamp[index] = new Date().toLocaleString();
 }
 
 app.get("/", (req,res) => {
@@ -42,6 +48,23 @@ app.post("/submit", (req,res) => {
 app.post("/delete", (req,res) => {
   const j = req.body.index;
   deleteArr(j);
+  res.redirect("/");
+});
+
+app.post("/edit", (req,res) => {
+  const j = req.body.index;
+  res.render("edit.ejs", {
+    index: j,
+    titles: arrTitle,
+    contents: arrText,
+  });
+});
+
+app.post("/update", (req,res) => {
+  const j = req.body.index;
+  const newTitle = req.body.title;
+  const newContent = req.body.content;
+  updateArr(j, newTitle, newContent);
   res.redirect("/");
 });
 

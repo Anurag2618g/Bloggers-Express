@@ -12,20 +12,27 @@
 <main class="container">
     <div class="row">
     <div class="col-md-8">
-        <% if(locals.titles, locals.contents, locals.timestamp){ %>   
-            <% for (let i = 0; i < titles.length; i++) { %>
-                <div class="blog-post">
-                    <div class="p-2 p-md-3 mb-2 rounded text-body-emphasis bg-body-secondary">
-                        <div class="col-lg-12 px-0">
-                        <h1 class="display-5 fst-italic left-justify underline"><%= titles[i] %></h1>
-                        <hr>
-                        <p class="lead my-3 left-justify"><%= contents[i] %></p>
-                        <p class="text-muted left-justify"><%= timestamp[i] %></p>
+
+        <% if (titles.length === 0 && contents.length === 0) { %>
+            <div class="blog-post">
+                <h2>So empty here... 😟</h2>
+            </div>
+            <% } else { %>
+                <% if(locals.titles, locals.contents, locals.timestamp){ %>   
+                    <% for (let i = 0; i < titles.length; i++) { %>
+                        <div class="blog-post">
+                            <div class="p-2 p-md-3 mb-2 rounded text-body-emphasis bg-body-secondary">
+                                <div class="col-lg-12 px-0">
+                                <h1 class="display-5 fst-italic left-justify underline"><%= titles[i] %></h1>
+                                <hr>
+                                <p class="lead my-3 left-justify"><%= contents[i] %></p>
+                                <p class="text-muted left-justify"><%= timestamp[i] %></p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            <% } %>  
-        <% } %> 
+                    <% } %>  
+                <% } %>
+            <% } %>
     </div>
     
     <div class="col-md-4">
@@ -33,15 +40,23 @@
         <div class="p-2 p-md-3 mb-2 rounded text-body-emphasis bg-body-secondary">
             <h2>My Posts</h2>
             <hr>
-            <% for(let j=0; j<titles.length; j++) { %>
-            <form action="/delete" method="POST">
-                <input type="hidden" name="index" value="<%= j %>">
-                <div class="mb-3">
-                    <p class="lead my-3 left-justify"><%= titles[j] %></p>
-                </div>
-                <button type="submit" class="btn btn-danger">Delete</button>
-            </form>
-            <hr>
+            <% if (titles.length === 0 && contents.length === 0) { %>
+                <h5>Go on, post that quirky thought you've been nurturing in your mind – the internet's a wild jungle, and your ideas are like glitter in the foliage! 🌟🌿</h5>
+            <% } else { %>
+                <% for(let j=0; j<titles.length; j++) { %>
+                    <form action="/delete" method="POST">
+                        <input type="hidden" name="index" value="<%= j %>">
+                        <div class="mb-3">
+                            <p class="lead my-3 left-justify"><%= titles[j] %></p>
+                        </div>
+                        <button type="submit" class="btn btn-dark btn-sm">Delete</button>
+                    </form>
+                    <form action="/edit" method="POST">
+                        <input type="hidden" name="index" value="<%= j %>">
+                        <button type="submit" class="btn btn-primary btn-sm">Edit</button>
+                    </form>
+                    <hr>
+                    <% } %>
             <% } %>
         </div>
         </div>
