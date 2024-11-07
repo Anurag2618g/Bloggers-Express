@@ -61,7 +61,7 @@ Navigate to the backend directory and start the server:
 
 
 cd backend
-npm start![th](https://github.com/user-attachments/assets/7dcdbeaf-ae18-46f0-84d2-fd36c5a0cbcf)
+npm start
 
 The backend server will start on http://localhost:5000.
 
